@@ -1,0 +1,24 @@
+{% extends 'recognitionpost/base.html' %}
+{% load googlecharts %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <h1>{{ post.title }}</h1>
+        <audio controls preload="auto">
+        <source src="{{ post.files.url }}" type="audio/mpeg">
+        </audio>
+        <h1>Текст</h1>
+        {{ text }}
+        <h1>Слова-паразиты</h1>
+        {{ parasites }} <br>
+        <h1>Обсессивная лексика</h1>  
+        Количество слов {{ bad_words }} <br>      
+    </div>
+
+
+{% endblock %}

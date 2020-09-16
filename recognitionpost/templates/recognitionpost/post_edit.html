@@ -1,0 +1,11 @@
+{% extends 'recognitionpost/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <h1>Загрузите ваш файл</h1>
+    <form enctype="multipart/form-data" method="post"  class="post-form">{% csrf_token %}
+    	<p>{% render_field form.title class="input" placeholder="Введите имя файла"%}</p>
+    	<p>{% render_field form.files %}</p>
+	    <button type="submit" class="but">Обработать</button>
+    </form>
+{% endblock %}

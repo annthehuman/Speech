@@ -1,0 +1,244 @@
+@mixin filestyler__image($config: ()) {
+  $config: map-merge($filestyler-default, $config);
+  $progress-i-height: map-get($config, progress-i-height);
+  $progress-i-color:  map-get($config, progress-i-color);
+  $color:             map-get($config, color);
+  $color-success:     map-get($config, color-success);
+  $color-danger:      map-get($config, color-danger);
+  $duration:          map-get($config, duration);
+  $no-image-width:    map-get($config, no-image-width);
+
+  // begin styles
+  $gap: 0.05em;
+  font-size: 120px;
+
+  .filestyler {
+    &__list {
+      margin-right: -$gap;
+      margin-bottom: -$gap;
+      overflow: hidden;
+    }
+
+    &__item {
+      position: relative;
+      float: left;
+      min-width: 0.25em;
+      max-width: 2em;
+      height: 1em;
+      margin-right: $gap;
+      margin-bottom: $gap;
+
+      &:hover, &:focus {
+        .filestyler {
+          &__info, &__remove {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+
+      &_is-no-image {
+        width: 1em;
+        border: solid 2px $color;
+
+        &:before {
+          content: ' ';
+          position: absolute;
+          left: 5%;
+          top: 5%;
+          right: 5%;
+          bottom: 40%;
+          background: transparent map-get($config, no-image-img) no-repeat scroll center center;
+          background-size: contain;
+        }
+      }
+
+      &_is-image {
+        .filestyler {
+          &__info {
+            color: white;
+            background-color: transparentize(black, 0.4);
+            visibility: hidden;
+            opacity: 0;
+          }
+        }
+      }
+
+      &_pause, &_progress {
+        .filestyler {
+          &__figure {
+            opacity: 0.5;
+          }
+        }
+      }
+
+      &_done {
+        .filestyler {
+          &__progress {
+            display: none;
+          }
+        }
+      }
+
+      &_fail {
+        .filestyler {
+          &__figure {
+            &:before {
+              content: ' ';
+              position: absolute;
+              left: 0;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              background: transparentize($color-danger, 0.5) map-get($config, fail-img) no-repeat scroll center center;
+              background-size: contain;
+            }
+          }
+        }
+      }
+    }
+
+    &__figure {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      background: transparent no-repeat scroll center center;
+      background-size: cover;
+      transition: opacity $duration;
+    }
+
+    &__image {
+      max-width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    &__remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1em;
+      padding: 0;
+      font-size: 0.2em;
+      line-height: 1;
+      color: #fff;
+      background-color: $color-danger;
+      border: none;
+      cursor: pointer;
+      visibility: hidden;
+      opacity: 0;
+      transition: all $duration;
+
+      &:before {
+        content: '\0000D7';
+      }
+    }
+
+    &__info {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0.4em 0.8em;
+      font-size: 13px;
+      font-size: 0.8125rem;
+      transition: all $duration;
+    }
+
+    &__name, &__size {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__type {
+      display: none;
+    }
+
+    &__progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+
+      &-bar {
+        width: 0;
+        height: $progress-i-height;
+        background-color: $progress-i-color;
+        box-shadow: 0 0 1px transparentize(black, 0.7);
+      }
+
+      &-perc {
+        display: none;
+      }
+    }
+  }
+
+  &.filestyler_uninitialized {
+    .filestyler {
+      &__plus {
+        margin-right: $gap;
+        margin-bottom: $gap;
+      }
+    }
+  }
+
+  &.filestyler_initialized {
+    .filestyler {
+      &__clear, &__plus {
+        float: left;
+        display: block;
+        overflow: hidden;
+        width: 1em;
+        height: 1em;
+        margin-right: $gap;
+        margin-bottom: $gap;
+        text-align: center;
+        color: $color;
+        background-color: transparent;
+        border: solid 2px;
+        cursor: pointer;
+        transition: color $duration;
+
+        &:before {
+          display: inline-block;
+          vertical-align: top;
+          font-family: Arial, sans-serif;
+          font-size: 0.5em;
+          line-height: 2;
+        }
+      }
+
+      &__clear {
+        width: 0.5em;
+
+        &:hover, &:focus {
+          color: $color-danger;
+        }
+
+        &:before {
+          content: '«';
+          line-height: 1.8;
+        }
+      }
+
+      &__plus {
+        &:hover, &:focus {
+          color: $color-success;
+        }
+
+        &:before {
+          content: '+';
+        }
+      }
+    }
+  }
+
+  &.filestyler_empty {
+    .filestyler {
+      &__clear {
+        display: none;
+      }
+    }
+  }
+}

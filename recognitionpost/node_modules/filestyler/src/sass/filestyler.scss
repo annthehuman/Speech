@@ -1,0 +1,63 @@
+.filestyler {
+  &__file {
+    display: block;
+  }
+
+  &_empty {
+    .filestyler {
+      &__clear {
+        display: none;
+      }
+    }
+  }
+
+  &_uninitialized {
+    .filestyler {
+      &__remove, &__clear, &__visible {
+        display: none;
+      }
+    }
+  }
+
+  &_mode_default, &_mode_add {
+    .filestyler {
+      &__remove {
+        display: none;
+      }
+    }
+  }
+
+  &_initialized {
+    .filestyler {
+      &__file {
+        position: relative;
+        overflow: hidden;
+      }
+
+      &__input {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 1000px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+      }
+
+      &__drop { // need for DropPlugin moveInputOnDrag
+        position: relative;
+        overflow: hidden;
+      }
+
+      &__hidden {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,195 @@
+@mixin filestyler__list($config: ()) {
+  $config: map-merge($filestyler-default, $config);
+  $progress-l-color:  map-get($config, progress-l-color);
+  $color:             map-get($config, color);
+  $color-size:        map-get($config, color-size);
+  $color-success:     map-get($config, color-success);
+  $color-danger:      map-get($config, color-danger);
+
+  .filestyler {
+    &__list {
+      display: inline-block;
+      max-width: 100%;
+    }
+
+    &__item {
+      position: relative;
+      margin-top: 0.5em;
+      padding-right: 2em;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &_pause, &_progress {
+        .filestyler {
+          &__info {
+            opacity: 0.33;
+          }
+        }
+      }
+
+      &_done {
+        .filestyler {
+          &__progress {
+            display: none;
+          }
+        }
+      }
+
+      &_fail {
+        .filestyler {
+          &__info {
+            color: $color-danger;
+          }
+        }
+      }
+    }
+
+    &__figure {
+      display: none;
+    }
+
+    &__remove {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 1em;
+      height: 1em;
+      margin-top: -0.5em;
+      padding: 0;
+      font-size: 1.5em;
+      line-height: 1;
+      color: $color-danger;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      &:before {
+        content: '\0000D7';
+        font-family: Arial, sans-serif;
+      }
+    }
+
+    &__info {
+      display: flex;
+      position: relative;
+      white-space: nowrap;
+
+      &:before {
+        content: ' ';
+        display: inline-block;
+        vertical-align: middle;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.3em;
+        font-size: 1.25em;
+        background: transparent map-get($config, list-img) no-repeat scroll center center;
+        background-size: contain;
+      }
+    }
+
+    &__name, &__size {
+      display: inline-block;
+      vertical-align: middle;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__size {
+      margin-left: 0.5em;
+      padding-top: 0.125em;
+      font-size: 0.875em;
+      color: $color-size;
+
+      &:before {
+        content: '(';
+      }
+
+      &:after {
+        content: ')';
+      }
+    }
+
+    &__type {
+      display: none;
+    }
+
+    &__progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+
+      &-bar {
+        width: 0;
+        height: 100%;
+        background-color: $progress-l-color;
+      }
+
+      &-perc {
+        display: none;
+      }
+    }
+  }
+
+  &.filestyler_initialized {
+    .filestyler {
+
+      &__plus, &__clear {
+        display: inline-block;
+        vertical-align: middle;
+        width: 1.25em;
+        height: 1.25em;
+        margin-top: 0.5em;
+        padding: 0;
+        font-size: 1.5em;
+        line-height: 1.25;
+        text-align: center;
+        color: $color;
+        background-color: transparent;
+        border: solid 2px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-sizing: content-box;
+
+        &:hover, &:focus {
+          color: black;
+        }
+
+        &:before {
+          font-family: Arial, sans-serif;
+          vertical-align: top;
+        }
+      }
+
+      &__plus {
+        color: $color-success;
+
+        &:before {
+          content: '+';
+        }
+      }
+
+      &__clear {
+        float: right;
+        color: $color-danger;
+
+        &:before {
+          content: '«';
+          line-height: 1.1;
+        }
+      }
+    }
+  }
+
+  &.filestyler_empty {
+    .filestyler {
+      &__clear {
+        display: none;
+      }
+    }
+  }
+}

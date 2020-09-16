@@ -1,0 +1,41 @@
+@import "https://fonts.googleapis.com/css?family=Roboto:300,700&subset=cyrillic,cyrillic-ext";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font: 100%/1.5 'Roboto', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font: inherit;
+}
+
+h2 {
+    margin: 0 0 0.5em 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+h4 {
+    margin: 2em 0 1em 0;
+    font-size: 20px;
+    font-weight: 300;
+    color: #999;
+}
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #eee;
+}
+
+.sample {
+    margin-bottom: 4em;
+}

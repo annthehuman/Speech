@@ -1,0 +1,40 @@
+{
+  "name": "filestyler",
+  "description": "File input styling plugin with ajax upload support",
+  "main": "dist/filestyler.js",
+  "keywords": [
+    "form",
+    "file input",
+    "file upload"
+  ],
+  "authors": [
+    {
+      "name": "PaulZi",
+      "email": "pavel.zimakoff@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulzi/filestyler.git"
+  },
+  "dependencies": {
+    "jquery": "^1.12.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-uglify": "^2.1.0",
+    "grunt-js-build": "^0.1.3",
+    "grunt-postcss": "^0.8.0",
+    "grunt-sass": "^2.0.0",
+    "gruntify-eslint": "^3.1.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}

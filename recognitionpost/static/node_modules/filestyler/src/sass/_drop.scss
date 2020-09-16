@@ -1,0 +1,52 @@
+@mixin filestyler__drop($config: ()) {
+  $config: map-merge($filestyler-default, $config);
+  $color:         map-get($config, color);
+  $color-primary: map-get($config, color-primary);
+  $duration:      map-get($config, duration);
+
+  &:before, &:after {
+    content: ' ';
+    position: absolute;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: map-get($config, drop-color);
+    visibility: hidden;
+    opacity: 0;
+    transition: all $duration;
+  }
+
+  &:after {
+    background: transparent map-get($config, drop-img) no-repeat scroll center center;
+    background-size: contain;
+  }
+
+  &_hint, &_in {
+    outline: dashed 1px $color;
+
+    &:before, &:after {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &:after {
+      opacity: 0.5;
+    }
+
+    .filestyler {
+      &__drop-input {
+        z-index: 100;
+      }
+    }
+  }
+
+  &_in {
+    outline: solid 1px $color-primary;
+
+    &:after {
+      opacity: 1;
+    }
+  }
+}
